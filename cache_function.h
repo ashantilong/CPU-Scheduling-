@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 //---------------------------------------------------
 //CSCI 340 - Operating System I
 // FAll 2021 (Anthony Leclerc)
@@ -8,21 +10,12 @@
 
 //Constant
 
-
 //----------------------------------------------------------------
 //C-Style data structures
-
-
-typedef struct{
-
-
-
-
-}v_struct_t;
-
 
 
 //-----------------------BEGIN (FUNCTION)--------------------------
 //description:
 
-int cache_block();
+int cache_block(char*);
+int realloc_block();
