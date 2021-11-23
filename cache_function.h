@@ -13,9 +13,9 @@
 //----------------------------------------------------------------
 //C-Style data structures
 
-
 //-----------------------BEGIN (FUNCTION)--------------------------
 //description:
 
-int cache_block(char*);
+int cache_block(int* A, clock_t t);
 int realloc_block();
+ 
