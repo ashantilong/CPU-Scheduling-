@@ -21,8 +21,16 @@ For our approach we are taking an array of integers and we are looping through i
 ### Our Code
 
 ### Output and Graph 
+![Image of our cache block out](cache_block_access_times.png)
+
+![Image of our cache block graph](cache_block_graph.PNG)
+
+
+### Interpretation 
+We saw the spike start at 32 bytes and it peak at 64 bytes so we decided to experiment with block sizes of 32 bytes and 64 bytes 
 
 ## **2. How Big is the Cache?**
+
 
 ## **3. How Long Does a Reference to Main Memory Take?**
 
