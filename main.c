@@ -23,7 +23,7 @@ int main(int argc, char** argv){
     for (int i = 0; i < SIZE; i++){
         arr[i] = 1;
     }
-    access_time_data(arr);
+    cache_access_time(arr);
     */
 
     cache_size();

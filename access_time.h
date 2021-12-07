@@ -17,4 +17,5 @@
 
 //-----------------------BEGIN (FUNCTION)--------------------------
 //description:
-int access_time_data(int* arr, int size);
+int cache_access_time(int* arr, int size);
+int cache_block_access_time();

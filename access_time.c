@@ -12,7 +12,7 @@ int comp (const void * elem1, const void * elem2){
     return 0;
 }
 
-int access_time_data(int* arr, int size){
+int cache_access_time(int* arr, int size){
     struct timespec start,stop;
     double timediff;
     double totaltime;
@@ -52,4 +52,12 @@ int access_time_data(int* arr, int size){
     printf( "Average time for accessing an array of size %dKB containing %d integers: %.10lf\n", (size/1024)*(int)sizeof(int), size, avgtime);
     printf( "Median time for accessing an array of size %dKB containing %d integers: %.10lf\n", (size/1024)*(int)sizeof(int), size, mediantime);
     return( EXIT_SUCCESS );
+}
+
+int cache_block_access_time(){
+    int size = 64*1024/sizeof(int);
+    int* arr = (int*) calloc(size,sizeof(int)); // making an array of integers of size 128KB (should be less than cache size)
+    int step = 256;
+
+    return 0;
 }

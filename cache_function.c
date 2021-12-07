@@ -6,7 +6,8 @@
 
 const int KB = 1024;
 const int MB = 1024 * KB;
-int SIZES[] = {1*KB,4*KB,8*KB,16*KB,24*KB,32*KB,64*KB,128*KB,128*KB*2,128*KB*3,512*KB,1*MB,2*MB,3*MB,4*MB};
+// int SIZES[] = {1*KB,4*KB,8*KB,16*KB,24*KB,32*KB,64*KB,128*KB,128*KB*2,128*KB*3,512*KB,1*MB,2*MB,3*MB,4*MB};
+int SIZES[] = {4*MB,3*MB,2*MB,MB,512*KB,128*KB*3,128*KB*2,128*KB,64*KB,32*KB,24*KB,16*KB,8*KB,4*KB,KB};
 
 void cache_size(/*int* A, clock_t t*/){
     /*
@@ -25,15 +26,13 @@ void cache_size(/*int* A, clock_t t*/){
     return *A;
     */
 
-    //printf("made it into cache block\n");
     for (int i = 0; i < sizeof(SIZES) / sizeof(int); i++){
-        //printf("made it inside SIZES loop\n");
         int size = SIZES[i];
         int* arr = (int*) calloc(size,sizeof(int));
         for (int i = 0; i < size; i++){
             arr[i] = 1;
         }
-        access_time_data(arr,size);
+        cache_access_time(arr,size);
         free(arr);
     }
 }
