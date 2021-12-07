@@ -14,8 +14,6 @@ Preallocate a large array. Then access each element sequentially and record the 
 
 For our approach we are taking an array of integers and we are looping through it and accessing indexes using step variables which are the number of elements we skip and then it increases by (* 2). So for each iteration we theorized that we go to each iteration  using the step. Eventually the cache block size should cause a spike in the index access time because eventually we would need to call another cache block. The below graph contains our experimental values for different step sizes.
 
-### Our Code
-
 ### Output and Graph 
 ![Image of our cache block out](cache_block_access_times.png)
 
@@ -27,6 +25,10 @@ We saw the spike start at 32 bytes and it peak at 64 bytes so we decided to expe
 
 ## **2. How Big is the Cache?**
 
+### Thought Process:
+
+During our research we discovered that a typical modern  processors typically have a clock cycle of 0.5ns while accesses to main memory are 50ns or more. Thus, an access to main memory is very expensive, over 100 clock cycles. To get good processor performance the average times to fetch instructions and to access data from memory must be reduced.Basically, as the list grows you'll see the performance worsen in steps as another layer of caching is overwhelmed. The idea is simple... if the cache holds the last N units of memory you've accessed, then looping around a buffer of even N+1 units should ensure constant cache misses. (There're more details/caveats in the "measuring latencies of memory" answer you link to in your question). We should be able to get some idea of the potential size of the the largest cache that might front your RAM from hardware documentation - as long as you operate on more memory than that you should be measuring physical RAM times.
+
 
 ### Output and Graph
 ![Image of our cache size output](cache_size_times.png)
@@ -35,9 +37,9 @@ We saw the spike start at 32 bytes and it peak at 64 bytes so we decided to expe
 
 
 ## **3. How Long Does a Reference to Main Memory Take?**
-### Thought Process:
 
-During our research we discovered that a typical modern  processors typically have a clock cycle of 0.5ns while accesses to main memory are 50ns or more. Thus, an access to main memory is very expensive, over 100 clock cycles. To get good processor performance the average times to fetch instructions and to access data from memory must be reduced.Basically, as the list grows you'll see the performance worsen in steps as another layer of caching is overwhelmed. The idea is simple... if the cache holds the last N units of memory you've accessed, then looping around a buffer of even N+1 units should ensure constant cache misses. (There're more details/caveats in the "measuring latencies of memory" answer you link to in your question). We should be able to get some idea of the potential size of the the largest cache that might front your RAM from hardware documentation - as long as you operate on more memory than that you should be measuring physical RAM times.
-
+Unfortunately, we used a modulo in the timing block when creating our cache size experiment, which polluted our time a bit. However, judging from the ratio between the spiked and non-spiked accesses, we can assume accesses from main memory to take around 3 times as long as cache references. If, from the question below, we assume cache references to take 2.8 nanoseconds this puts main memory references to around 8.4 nanoseconds.
 
 ## **4. How Long Does a Reference that can be Satisfied from Cache Take?**
+
+It would appear, judging from the accesses which didn't cause a "spike" in our cache block experiment, that a reference from cache takes approximately 2.8 nanoseconds.
