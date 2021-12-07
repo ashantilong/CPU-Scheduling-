@@ -4,7 +4,8 @@
 #include "access_time.h"
 #include "cache_function.h"
 
-const int BLOCK = 64;
+const int BLOCK = 32;
+const int NUMRUNS = 100000;
 
 int comp (const void * elem1, const void * elem2){
     int f = *((double*)elem1);
@@ -22,16 +23,16 @@ int cache_access_time(int* arr, int size){
     double mediantime;
     int temp = 0;
 
-    double* times = (double*)calloc(size,sizeof(double));
+    double* times = (double*)calloc(NUMRUNS,sizeof(double));
 
-    for (int i = 0; i < size; i++ /*+= BLOCK*/){
+    for (int i = 0; i < NUMRUNS; i++){
 
       if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
         perror( "clock gettime" );
         exit( EXIT_FAILURE );
       }
 
-      temp += arr[i];
+      temp += arr[(i * BLOCK) % size];
 
       if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
         perror( "clock gettime" );
@@ -46,9 +47,9 @@ int cache_access_time(int* arr, int size){
       times[i] = timediff;
     }
 
-    avgtime = totaltime / size;
-    qsort (times, size, sizeof(double), comp);
-    mediantime = (times[size/2] + times[(size/2) - 1]) / 2;
+    avgtime = totaltime / NUMRUNS;
+    qsort (times, NUMRUNS, sizeof(double), comp);
+    mediantime = (times[NUMRUNS/2] + times[(NUMRUNS/2) - 1]) / 2;
 
     printf("========================%d========================\n",(temp/1024)*(int)sizeof(int));
     printf( "Average time for accessing an array of size %dKB containing %d integers: %.10lf\n", (size/1024)*(int)sizeof(int), size, avgtime);
