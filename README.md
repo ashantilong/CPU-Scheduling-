@@ -27,7 +27,19 @@ We saw the spike start at 32 bytes and it peak at 64 bytes so we decided to expe
 
 ### Thought Process:
 
-During our research we discovered that a typical modern  processors typically have a clock cycle of 0.5ns while accesses to main memory are 50ns or more. Thus, an access to main memory is very expensive, over 100 clock cycles. To get good processor performance the average times to fetch instructions and to access data from memory must be reduced.Basically, as the list grows you'll see the performance worsen in steps as another layer of caching is overwhelmed. The idea is simple... if the cache holds the last N units of memory you've accessed, then looping around a buffer of even N+1 units should ensure constant cache misses. (There're more details/caveats in the "measuring latencies of memory" answer you link to in your question). We should be able to get some idea of the potential size of the the largest cache that might front your RAM from hardware documentation - as long as you operate on more memory than that you should be measuring physical RAM times.
+When doing research we realized that compared to the main memory (RAM), the Processor Cache provides faster access to information, resulting in faster processing of programs and data on a computer. Compared to RAM, Processor Cache Memory is more expensive, which explains the reason for lesser amounts of Processor Cache Memory being used in computers.
+
+Before we started any type of implentation we first check our computer cache size so we could use as a rough estimate to where we should see the spikes.
+
+L1 cache: This is the primary cache embedded in the processor chip. This type of Cache is fast, but it offers very limited storage capacity.
+L2 cache: This secondary cache can either be embedded on the processor chip or made available on its own separate chip with a high-speed bus connecting it to the CPU.
+L3 cache: This type of processor cache is designed to serve as a backup for L1 and L2 caches. While L3 Cache is slower compared to L1 and L2 Caches, it is faster than RAM and offers significant boost to the performance of L1, L2 Cache.
+
+#### Approach 1:
+One approach we could of implenmented was to allocate a BIG char array (make sure it is too big to fit in L1 or L2 cache). Fill it with random data. Start walking over the array in steps of n bytes. Do something with the retrieved bytes, like summing them. Benchmark and calculate how many bytes/second you can process with different values of n, starting from 1 and counting up to 1000 or so. Make sure that your benchmark prints out the calculated sum, so the compiler can't possibly optimize the benchmarked code away. When n == your cache line size, each access will require reading a new line into the L1 cache. So the benchmark results should get slower quite sharply at that point. If the array is big enough, by the time you reach the end, the data at the beginning of the array will already be out of cache again, which is what you want. So after you increment n and start again, the results will not be affected by having needed data already in the cache. So basically we can  measure the cache characteristics, we run our experiment several times, varying the stride and the array size. We make sure that the stride varies at least between 4 bytes and twice the maximal expected cache line size, and that the array size varies from half the minimal expected cache size to at least ten times the maximal expected cache size.
+
+#### Actual Approach:
+
 
 
 ### Output and Graph
