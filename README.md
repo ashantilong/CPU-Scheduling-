@@ -28,6 +28,12 @@ We saw the spike start at 32 bytes and it peak at 64 bytes so we decided to expe
 ## **2. How Big is the Cache?**
 
 
+### Output and Graph
+![Image of our cache size output](cache_size_times.png)
+
+![Image of our cache size graph](cache_size_graph.PNG)
+
+
 ## **3. How Long Does a Reference to Main Memory Take?**
 ### Thought Process:
 
