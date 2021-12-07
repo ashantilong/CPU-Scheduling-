@@ -2,17 +2,17 @@
 
 ## **1. How Big is a Cache Block?**
 ### Thought Process:
-The first thing we wanted to do is understand what a cache block is. From our research we detirmined that a cache block is described as a basic unit for cache storage. It typically contain multiple bytes/words of data. This is due to many different regions of memory being mapped into a block, the tag is used to differentiate between them. A typical machine has a cache block of 32bytes. Knowing this information we came up with two approach  to implement.
+The first thing we wanted to accomplish is understand what exactly a cache block is. From our research we determined that a cache block is a basic unit for cache storage that typically contains multiple bytes/words of data. This is due to many different regions of memory being mapped into a block; the tag is used to differentiate between them. Upon further research, it was discovered that a typical machine has a cache block of 32 bytes. Knowing this information, we came up with two approaches to implement.
 
 #### Approach 1:
-Fill a plain array with random values, and do something simple, e.g. square each element in a loop. Then measure the execution time as a function of the array length. You'll very clearly see a jump in the exec time once your array does not fit into the cache.
+Fill a plain array with random values, and do something simple, e.g. square each element in a loop. Then measure the execution time as a function of the array length. You'll very clearly see a jump in the execution time once your array does not fit into the cache block.
 #### Approach 2:
 
-Preallocate a large array. Then access each element sequentially and record the time for each access. Ideally there will be a jump in access time when cache miss occurs. Then you can calculate your L1 Cache. It might not work but worth trying
+Preallocate a large array. Then access each element sequentially and record the time for each access. Ideally there will be a jump in access time when a cache miss occurs. Then you can calculate your L1 Cache.
 
 #### Actual Approach:
 
-For our approach we are taking an array of integers and we are looping through it and acessing indexes using step variables which are the number of elements we skip and then it increases at by (^ 2). So for each interation we  theroized thatas we go to each iteriation  using the step eventually the cache block size should cause a spike in the index acess time because eventually we would need to call another cache block. As you look below at *Figure 1* below you will see a spike from 16KB to 32KB
+For our approach we are taking an array of integers and we are looping through it and accessing indexes using step variables which are the number of elements we skip and then it increases by (* 2). So for each iteration we theorized that we go to each iteration  using the step. Eventually the cache block size should cause a spike in the index access time because eventually we would need to call another cache block. The below graph contains our experimental values for different step sizes.
 
 ### Our Code
 
