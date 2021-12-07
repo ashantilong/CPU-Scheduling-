@@ -1,11 +1,7 @@
 # **CPU-Scheduling - Ashanti Long & Cormac Conahan**
-Our throught process 
-our code 
-output graph 
 
-interpreation 
 ## **1. How Big is a Cache Block?**
-### Throught Process:
+### Thought Process:
 The first thing we wanted to do is understand what a cache block is. From our research we detirmined that a cache block is described as a basic unit for cache storage. It typically contain multiple bytes/words of data. This is due to many different regions of memory being mapped into a block, the tag is used to differentiate between them. A typical machine has a cache block of 32bytes. Knowing this information we came up with two approach  to implement.
 
 #### Approach 1:
@@ -33,5 +29,9 @@ We saw the spike start at 32 bytes and it peak at 64 bytes so we decided to expe
 
 
 ## **3. How Long Does a Reference to Main Memory Take?**
+### Thought Process:
+
+During our research we discovered that a typical modern  processors typically have a clock cycle of 0.5ns while accesses to main memory are 50ns or more. Thus, an access to main memory is very expensive, over 100 clock cycles. To get good processor performance the average times to fetch instructions and to access data from memory must be reduced.Basically, as the list grows you'll see the performance worsen in steps as another layer of caching is overwhelmed. The idea is simple... if the cache holds the last N units of memory you've accessed, then looping around a buffer of even N+1 units should ensure constant cache misses. (There're more details/caveats in the "measuring latencies of memory" answer you link to in your question). We should be able to get some idea of the potential size of the the largest cache that might front your RAM from hardware documentation - as long as you operate on more memory than that you should be measuring physical RAM times.
+
 
 ## **4. How Long Does a Reference that can be Satisfied from Cache Take?**
