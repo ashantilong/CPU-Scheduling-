@@ -7,27 +7,9 @@
 
 
 int main(int argc, char** argv){
-    /*
-    int a = 1;
-    clock_t start;
-    
-    start = clock();
-    while(a <= 64 * 1024 * 1024){
-        cache_block(&a , start);
-        a = a + 1;
-    }
-    */
 
-    /*
-    int* arr = (int*) calloc(SIZE,sizeof(int));
-    for (int i = 0; i < SIZE; i++){
-        arr[i] = 1;
-    }
-    cache_access_time(arr);
-    */
-
-    //cache_size();
-    cache_block_access_time();
+    cache_block_size();
+    cache_size();
 
     return 0;
 }

@@ -17,5 +17,5 @@
 //description:
 
 void cache_size(/*int* A, clock_t t*/);
-int realloc_block();
+void cache_block_size();
  

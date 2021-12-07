@@ -18,4 +18,3 @@
 //-----------------------BEGIN (FUNCTION)--------------------------
 //description:
 int cache_access_time(int* arr, int size);
-int cache_block_access_time();
