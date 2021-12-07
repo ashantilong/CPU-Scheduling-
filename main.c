@@ -26,7 +26,8 @@ int main(int argc, char** argv){
     cache_access_time(arr);
     */
 
-    cache_size();
+    //cache_size();
+    cache_block_access_time();
 
     return 0;
 }
