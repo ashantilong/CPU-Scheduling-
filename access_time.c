@@ -4,7 +4,7 @@
 #include "access_time.h"
 #include "cache_function.h"
 
-const int BLOCK = 32;
+const int BLOCK = 64;
 const int NUMRUNS = 100000;
 
 int comp (const void * elem1, const void * elem2){
